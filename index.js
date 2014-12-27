@@ -8,31 +8,31 @@ app.configure();
 
 var startTwitterListener = function(){
 
-var stream = app.T.stream('statuses/filter', { track: 'RaspberryPi' })
+	var stream = app.T.stream('statuses/filter', { track: 'RaspberryPi' });
 
-stream.on('tweet', function (tweet) {
-	if(!tweet.retweeted_status){
-	  console.log(tweet.user.name + ': ' + tweet.text);
-	  console.log(' ');
-	  if(app.candyMachine){
-		  app.candyMachine.dispense();
+	stream.on('tweet', function (tweet) {
+		if(!tweet.retweeted_status){
+		  console.log(tweet.user.name + ': ' + tweet.text);
+		  console.log(' ');
+		  if(app.candyMachine){
+			  app.candyMachine.dispense();
+			}
+		} else{
+		  console.warn('RT doesn\'t count '+ tweet.user.name);
 		}
-	} else{
-	  console.warn('RT doesn\'t count '+ tweet.user.name);
-	}
-});
+	});
 
-stream.on('limit', function (limitMessage) {
-  	console.error('Dave, you\'re hitting the twitter limit.');
-});
+	stream.on('limit', function (limitMessage) {
+	  	console.error('You\'re hitting the twitter limit.');
+	});
 
-// on error try again.
-stream.on('error', function(){
-  setTimeout( startTwitterListener , 5000);
-});
+	// on error try again 5 seconds later
+	stream.on('error', function(){
+	  setTimeout( startTwitterListener , 5000);
+	});
 
 }
 
-// first attempt:
+// first attempt after 2 seconds.:
 setTimeout( startTwitterListener , 2000);
 
