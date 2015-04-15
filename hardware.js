@@ -1,21 +1,23 @@
 var piblaster = require("pi-blaster.js");
 
+
 // servo wiring colours: brown negative, red [ositive, orange signal
 var hardware = {
 	candy:{},
 	servo:{
-	// 0.2 is far left
-	// 0.15 is center
-	// 0.1 is far right
+	  servo_pin: 4,
+    	  // 0.2 is far left
+	  // 0.15 is center
+	  // 0.1 is far right
 	  closedAngle: 0.184,
 	  openAngle:  0.1,
 	  open: function(){
 	   console.log('open');	  
-	   piblaster.setPwm(4, this.openAngle);
+	   piblaster.setPwm(servo_pin, this.openAngle);
 	  },
 	  close: function(){
 	   console.log("close");
-	    piblaster.setPwm(4, this.closedAngle);
+	    piblaster.setPwm(servo_pin, this.closedAngle);
 	  }
 	}
 };
