@@ -1,7 +1,7 @@
 var piblaster = require("pi-blaster.js");
 
 
-// servo wiring colours: brown negative, red [ositive, orange signal
+// servo wiring colours: brown negative, red positive, orange signal
 var hardware = {
 	candy:{},
 	servo:{
